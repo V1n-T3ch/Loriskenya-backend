@@ -9,6 +9,7 @@ dotenv.config();
 
 // Import routes
 const mpesaRoutes = require('./routes/mpesa');
+const storageRoutes = require('./routes/storage');
 
 // Initialize express
 const app = express();
@@ -17,8 +18,8 @@ const app = express();
 app.use(helmet()); // Security headers
 app.use(morgan('dev')); // Logging
 app.use(cors({
-    origin: process.env.FRONTEND_URL || '*', // Allow requests from frontend
-    methods: ['GET', 'POST'],
+    origin: process.env.FRONTEND_URL, // Allow requests from frontend
+    methods: ['GET', 'POST', 'DELETE'], // Added DELETE for file deletion
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(bodyParser.json());
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up routes
 app.use('/api/mpesa', mpesaRoutes);
+app.use('/api/storage', storageRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
