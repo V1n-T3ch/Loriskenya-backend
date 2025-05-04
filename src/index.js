@@ -7,8 +7,7 @@ const bodyParser = require('body-parser');
 
 dotenv.config();
 
-// Import routes
-const mpesaRoutes = require('./routes/mpesa');
+// Import route
 const storageRoutes = require('./routes/storage');
 
 // Initialize express
@@ -26,7 +25,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up routes
-app.use('/api/mpesa', mpesaRoutes);
 app.use('/api/storage', storageRoutes);
 
 // Health check endpoint
